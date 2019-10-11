@@ -4,7 +4,8 @@
   "description": "collaborative, web-socket based hangman",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
+    "serve" : "nodemon server/server.js",
+    "start": "npm run serve & webpack-dev-server --mode development",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -31,9 +32,10 @@
     "webpack-dev-server": "^3.8.2"
   },
   "dependencies": {
+    "@hot-loader/react-dom": "^16.8.6",
+    "express": "^4.17.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-hot-loader": "^4.12.15",
-    "@hot-loader/react-dom": "^16.8.6"
+    "react-hot-loader": "^4.12.15"
   }
 }
