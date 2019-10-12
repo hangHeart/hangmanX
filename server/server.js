@@ -1,6 +1,7 @@
-const express = require('express');
-
-const app = express();
+//https://socket.io/docs/
+const app = require('express')();
+const server = require('http').Server(app);
+let io = require('socket.io')(server)
 const PORT = 4000;
 
 app.get('/api', (req, res) => {
@@ -8,6 +9,13 @@ app.get('/api', (req, res) => {
   return res.status(200).json({ 'hello': true });
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log('Server listening on ', PORT);
 });
+
+io.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  })
+})
