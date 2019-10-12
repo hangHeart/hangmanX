@@ -9,7 +9,7 @@ class LetterWrapper extends Component {
   render() {
     return (
       <div>
-        <LetterSelector letters={this.props.letters} />
+        <LetterSelector letters={this.props.letters} letterClicked = {this.props.letterClicked}/>
       </div>
     )
   }
