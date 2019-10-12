@@ -34,7 +34,10 @@ module.exports = {
         target: "http://localhost:4000",
         changeOrigin: true,
       }
-    }
+    },
+    disableHostCheck: true,
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]
 };
+
+// https://github.com/webpack/webpack-dev-server/issues/1604
