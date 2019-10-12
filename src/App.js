@@ -79,6 +79,7 @@ class App extends Component{
 
     return(
       <div className="App">
+        <a href="https://github.com/login/oauth/authorize?client_id=6299af3a88a73b2fd148">Login with Github</a>
         <h1>{this.state.answer}</h1>
         <button onClick={this.onClick}>Send color to everyone</button>
         <button id="blue" onClick={() => this.setColor('blue')}>Blue</button>
