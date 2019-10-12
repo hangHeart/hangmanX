@@ -19,7 +19,7 @@ class App extends Component{
     });
 
     socket.on('news', function (data) {
-      console.log("news");
+      console.log("news", data);
     })
 
   }
