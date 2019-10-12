@@ -14,8 +14,12 @@ server.listen(PORT, () => {
 });
 
 io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
   socket.on('my other event', function (data) {
+    console.log("new");
     console.log(data);
-  })
+  });
+
+  socket.on("changeColor", function (color) {
+    io.sockets.emit('changeColor', color);
+  });
 })
