@@ -47,10 +47,11 @@ class App extends Component{
         'y': false,
         'z': false,
       },
-      answer: 'apple',
-      disp: '_____'
+      answer: ['a', 'p', 'p', 'l', 'e'],
+      disp: ['_', '_', '_', '_', '_'] 
       }
       this.onClick = this.onClick.bind(this);
+      this.letterClicked = this.letterClicked.bind(this); 
     }
 
   componentDidMount() {
@@ -63,6 +64,18 @@ class App extends Component{
     // });
   }
 
+  // change state when letter is selected
+  letterClicked(e) {
+    console.log('letter clicked was:', e);
+
+    // https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
+    this.setState(prevState => {
+      let letters = Object.assign({}, prevState.letters);  // creating copy of state variable jasper
+      letters[e] = true;                     // update the name property, assign a new value                 
+      return { letters };                                 // return new object jasper object
+    })
+  }
+
   setColor(color){
     this.setState({ color });
   }
@@ -72,19 +85,24 @@ class App extends Component{
   }
 
   render(){
-    
+    console.log('letters state after rendering is', this.state.letters)
+
     socket.on('changeColor', (col) => {
       document.body.style.backgroundColor = col
     })
+    
 
     return(
       <div className="App">
         <a href="https://github.com/login/oauth/authorize?client_id=6299af3a88a73b2fd148">Login with Github</a>
-        <h1>{this.state.answer}</h1>
+        <h1>Hangman X</h1>
         <button onClick={this.onClick}>Send color to everyone</button>
         <button id="blue" onClick={() => this.setColor('blue')}>Blue</button>
         <button id="red" onClick={() => this.setColor('red')}>Red</button>
-        <LetterWrapper />
+        <LetterWrapper 
+        letters={this.state.letters} 
+        letterClicked = {this.letterClicked}
+        answer={this.state.answer}/>
       </div>
     );
   }
