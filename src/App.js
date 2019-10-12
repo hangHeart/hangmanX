@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import {hot} from "react-hot-loader";
+import { hot } from "react-hot-loader";
+import io from 'socket.io-client';
 import "./App.css";
 
 class App extends Component{
@@ -10,6 +11,19 @@ class App extends Component{
       </div>
     );
   }
+
+  componentDidMount() {
+    const socket = io.connect("http://localhost:4000");
+    socket.on('connect', function () {
+      console.log("connecred");
+    });
+
+    socket.on('news', function (data) {
+      console.log("news");
+    })
+
+  }
+
 }
 
 export default hot(module)(App);
