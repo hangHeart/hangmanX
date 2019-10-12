@@ -98,7 +98,10 @@ class App extends Component{
         <button onClick={this.onClick}>Send color to everyone</button>
         <button id="blue" onClick={() => this.setColor('blue')}>Blue</button>
         <button id="red" onClick={() => this.setColor('red')}>Red</button>
-        <LetterWrapper letters={this.state.letters} letterClicked = {this.letterClicked}/>
+        <LetterWrapper 
+        letters={this.state.letters} 
+        letterClicked = {this.letterClicked}
+        answer={this.state.answer}/>
       </div>
     );
   }
