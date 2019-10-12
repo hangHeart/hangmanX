@@ -16,7 +16,9 @@ class LetterSelector extends Component {
     // generate buttons for each letter
     let letterButtonArr = [];
     for (let i = 0; i < letterArr.length; i += 1) {
-      letterButtonArr.push(<button id={letterArr[i] + '_button'} 
+      letterButtonArr.push(<button 
+        key={letterArr[i] + '_button'} 
+        className='letterButton'
         onClick = {
         () => {
           this.props.letterClicked(letterArr[i]);

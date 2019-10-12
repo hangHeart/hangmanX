@@ -47,8 +47,8 @@ class App extends Component{
         'y': false,
         'z': false,
       },
-      answer: 'apple',
-      disp: '_____'
+      answer: ['a', 'p', 'p', 'l', 'e'],
+      disp: ['_', '_', '_', '_', '_'] 
       }
       this.onClick = this.onClick.bind(this);
       this.letterClicked = this.letterClicked.bind(this); 
@@ -94,7 +94,7 @@ class App extends Component{
 
     return(
       <div className="App">
-        <h1>{this.state.answer}</h1>
+        <h1>Hangman X</h1>
         <button onClick={this.onClick}>Send color to everyone</button>
         <button id="blue" onClick={() => this.setColor('blue')}>Blue</button>
         <button id="red" onClick={() => this.setColor('red')}>Red</button>

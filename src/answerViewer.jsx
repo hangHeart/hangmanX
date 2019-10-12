@@ -11,7 +11,9 @@ class AnswerViewer extends Component {
     // generate our array of string characters
     let answerCharArray = [];
     for (let i = 0; i < this.props.answer.length; i += 1) {
-      answerCharArray.push(<p id={'answer_letter'+ i}>{this.props.answer[i]}</p>)
+      answerCharArray.push(<span
+        className='answerLetter'
+        key={'answer_letter'+ i}>{this.props.answer[i]}</span>)
     }
 
     return (
