@@ -8,7 +8,7 @@ const sequelize = new Sequelize('postgres://qidyetsfvczuwx:800b76c38416b1cf8f677
   }
 });
 
-sequelize.sync({ logging: console.log }).then(() => {
+sequelize.sync({ logging: false }).then(() => {
 });
 
 module.exports = sequelize;

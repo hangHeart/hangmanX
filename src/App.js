@@ -3,8 +3,6 @@ import { hot } from "react-hot-loader";
 import io from 'socket.io-client';
 import "./App.css";
 import LetterWrapper from './letterWrapper'
-
-const socket = io.connect("http://localhost:4000");
 // https://codeburst.io/isomorphic-web-app-react-js-express-socket-io-e2f03a469cd3
 
 class App extends Component{
@@ -56,23 +54,23 @@ class App extends Component{
         "Glugg."
       ],
       numGuesses: 0 
-      }
+    }
+      this.socket = io.connect("http://localhost:4000");
       this.onClick = this.onClick.bind(this);
       this.letterClicked = this.letterClicked.bind(this); 
     }
 
   componentDidMount() {
-    socket.on('connect', function () {
+    this.socket.on('connect', function () {
       console.log("connected");
     });
-
-    // socket.on('changeColor', function (col) {
-    //   document.body.style.backgroundColor = col
-    // });
   }
 
   // change state when letter is selected
   letterClicked(e) {
+
+    this.socket.emit("clickedLetter", e);
+
     console.log('letter clicked was:', e);
     // https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
 
@@ -103,17 +101,35 @@ class App extends Component{
   }
 
   onClick() {
-    socket.emit('changeColor', this.state.color) // change 'red' to this.state.color
+    this.socket.emit('changeColor', this.state.color) // change 'red' to this.state.color
   }
 
   render(){
     console.log('letters state after rendering is', this.state.letters)
 
-    socket.on('changeColor', (col) => {
+    this.socket.on('changeColor', (col) => {
       document.body.style.backgroundColor = col
-    })
-    
+    });
 
+    this.socket.on('clickedLetter', (e) => {
+      this.setState(prevState => {
+        let letters = Object.assign({}, prevState.letters);
+        letters[e] = true;
+        return { letters };
+      });
+      if(this.state.answer.includes(e)){
+        for (let i = 0; i < this.state.answer.length; i++){
+          if(this.state.answer[i] === e){
+            this.setState(prevState => {
+              let disp = prevState.disp.slice(); 
+              disp[i] = e;
+              return {disp};
+            })
+          }
+        }
+      }
+    });
+    
     return(
       <div className="App">
         <a href="https://github.com/login/oauth/authorize?client_id=6299af3a88a73b2fd148">Login with Github</a>

@@ -37,9 +37,10 @@ server.listen(PORT, () => {
 });
 
 io.on('connection', function (socket) {
-  socket.on('my other event', function (data) {
-    console.log("new");
-    console.log(data);
+
+  socket.on("clickedLetter", function (letter) {
+    console.log("recived", letter);
+    io.sockets.emit("clickedLetter", letter);
   });
 
   socket.on("changeColor", function (color) {
