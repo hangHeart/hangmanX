@@ -6,7 +6,6 @@ import LetterWrapper from './letterWrapper';
 import Clue from './clue';
 import HangViewer from './hangViewer';
 
-const socket = io.connect("http://localhost:4000");
 // https://codeburst.io/isomorphic-web-app-react-js-express-socket-io-e2f03a469cd3
 
 class App extends Component{
@@ -85,9 +84,36 @@ class App extends Component{
     this.socket.on('connect', function () {
       console.log("connected");
     });
+
+    this.socket.on('clickedLetter', (e) => {
+      this.setState(prevState => {
+        let letters = Object.assign({}, prevState.letters);
+        letters[e] = true;
+        return { letters };
+      });
+      if(this.state.answer.includes(e)){
+        for (let i = 0; i < this.state.answer.length; i++){
+          if(this.state.answer[i] === e){
+            this.setState(prevState => {
+              let disp = prevState.disp.slice(); 
+              disp[i] = e;
+              return {disp};
+            })
+          }
+        }
+      } else {
+        this.setState({numFailedGuesses: this.state.numFailedGuesses+1})
+      }
+    });
+
   }
 
-  gameEnded(){
+  componentDidUpdate() {
+    this.gameEnded();
+  }
+
+  gameEnded() {
+    console.log('triggered');
     // check for failure case
     const maxFailedGuesses = this.state.hang.length - 1;
     console.log('max failed gusses', maxFailedGuesses)
@@ -121,16 +147,17 @@ class App extends Component{
         }
       }
       console.log("this letter is in apple: ", e)
-    } else{
-      this.setState({numFailedGuesses: this.state.numFailedGuesses+1})
     }
+    // else {
+    //   this.setState({numFailedGuesses: this.state.numFailedGuesses+1})
+    // }
 
     this.setState(prevState => {
       let letters = Object.assign({}, prevState.letters);  // creating copy of state variable jasper
       letters[e] = true;                     // update the name property, assign a new value                 
       return { letters };                                 // return new object jasper object
     })
-    this.gameEnded();
+
   }
 
   setColor(color){
@@ -141,30 +168,12 @@ class App extends Component{
     this.socket.emit('changeColor', this.state.color) // change 'red' to this.state.color
   }
 
-  render(){
+  render() {
+  
     console.log('letters state after rendering is', this.state.letters)
 
     this.socket.on('changeColor', (col) => {
       document.body.style.backgroundColor = col
-    });
-
-    this.socket.on('clickedLetter', (e) => {
-      this.setState(prevState => {
-        let letters = Object.assign({}, prevState.letters);
-        letters[e] = true;
-        return { letters };
-      });
-      if(this.state.answer.includes(e)){
-        for (let i = 0; i < this.state.answer.length; i++){
-          if(this.state.answer[i] === e){
-            this.setState(prevState => {
-              let disp = prevState.disp.slice(); 
-              disp[i] = e;
-              return {disp};
-            })
-          }
-        }
-      }
     });
     
     return(
