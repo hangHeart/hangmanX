@@ -8,7 +8,7 @@ class LetterSelector extends Component {
   render() {
 
     // see what props/state we're getting
-    // console.log('props letters are', this.props.letters)
+    console.log('props letters are', this.props.letters)
     const letterObj = this.props.letters
     const letterArr = Object.keys(letterObj);
     // console.log('letterArr is', letterArr);
@@ -16,14 +16,15 @@ class LetterSelector extends Component {
     // generate buttons for each letter
     let letterButtonArr = [];
     for (let i = 0; i < letterArr.length; i += 1) {
-      letterButtonArr.push(<button 
-        key={letterArr[i] + '_button'} 
-        className='letterButton'
-        onClick = {
-        () => {
-          this.props.letterClicked(letterArr[i]);
-        }
-      }>{letterArr[i]}</button>)
+        console.log(letterObj[letterArr[i]])
+        letterButtonArr.push(<button 
+          key={letterArr[i] + '_button'} 
+          className='letterButton' disabled={letterObj[letterArr[i]] ? "disabled" : null}
+          onClick = {
+          () => {
+            this.props.letterClicked(letterArr[i]);
+          }
+        }>{letterArr[i]}</button>)
     }
 
     return (
