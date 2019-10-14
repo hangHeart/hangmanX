@@ -75,7 +75,6 @@ class App extends Component{
       numFailedGuesses: 0
     }
       this.gameEnded = this.gameEnded.bind(this);
-      this.onClick = this.onClick.bind(this);
       this.letterClicked = this.letterClicked.bind(this);
       this.socket = io.connect("http://localhost:4000");
     }
@@ -160,14 +159,6 @@ class App extends Component{
 
   }
 
-  setColor(color){
-    this.setState({ color });
-  }
-
-  onClick() {
-    this.socket.emit('changeColor', this.state.color) // change 'red' to this.state.color
-  }
-
   render() {
   
     console.log('letters state after rendering is', this.state.letters)
@@ -181,9 +172,6 @@ class App extends Component{
         <a href="https://github.com/login/oauth/authorize?client_id=6299af3a88a73b2fd148">Login with Github</a>
         <h1>Hangman X</h1>
         <Clue clue={this.state.clue}/>
-        <button onClick={this.onClick}>Send color to everyone</button>
-        <button id="blue" onClick={() => this.setColor('blue')}>Blue</button>
-        <button id="red" onClick={() => this.setColor('red')}>Red</button>
         <HangViewer
           hang={this.state.hang}
           numFailedGuesses={this.state.numFailedGuesses}
