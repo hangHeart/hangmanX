@@ -49,6 +49,15 @@ class App extends Component{
         'y': false,
         'z': false,
       },
+      gameStore: [
+        [["It is the thing you might cut yourself on if you reach out to touch the world like a ball"],
+        ['m','o','u','n','t','a','i','n'],
+        ['_','_','_','_','_','_','_','_']],
+        [],
+        [],
+        [],
+        []
+      ],
       clue: "It hangs in the sky, before it falls, but you do not want to avoid it.",
       answer: ['a', 'p', 'p', 'l', 'e'],
       disp: ['_', '_', '_', '_', '_'],
@@ -66,8 +75,9 @@ class App extends Component{
       ],
       numFailedGuesses: 0 
       }
+      this.gameEnded = this.gameEnded.bind(this);
       this.onClick = this.onClick.bind(this);
-      this.letterClicked = this.letterClicked.bind(this); 
+      this.letterClicked = this.letterClicked.bind(this);
     }
 
   componentDidMount() {
@@ -79,6 +89,20 @@ class App extends Component{
     //   document.body.style.backgroundColor = col
     // });
   }
+
+  gameEnded(){
+    // check for failure case
+    const maxFailedGuesses = this.state.hang.length - 1;
+    console.log('max failed gusses', maxFailedGuesses)
+    if (this.state.numFailedGuesses === maxFailedGuesses){
+      alert(" game over")
+    };
+    // check for success case
+    if(this.state.disp.join('') == this.state.answer.join('')) {
+      alert('success');
+    }
+  }
+
 
   // change state when letter is selected
   letterClicked(e) {
@@ -106,7 +130,7 @@ class App extends Component{
       letters[e] = true;                     // update the name property, assign a new value                 
       return { letters };                                 // return new object jasper object
     })
-    //console.log("state: ",this.state)
+    this.gameEnded();
   }
 
   setColor(color){
