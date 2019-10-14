@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { hot } from "react-hot-loader";
 import io from 'socket.io-client';
 import "./App.css";
-import LetterWrapper from './letterWrapper'
+import LetterWrapper from './letterWrapper';
+import Clue from './clue';
+import HangViewer from './hangViewer';
 
 const socket = io.connect("http://localhost:4000");
 // https://codeburst.io/isomorphic-web-app-react-js-express-socket-io-e2f03a469cd3
@@ -47,15 +49,22 @@ class App extends Component{
         'y': false,
         'z': false,
       },
+      clue: "It hangs in the sky, before it falls, but you do not want to avoid it.",
       answer: ['a', 'p', 'p', 'l', 'e'],
       disp: ['_', '_', '_', '_', '_'],
-      hang: ["Who? Me? I didn't do anything.",
+      hang: [
+        "I'm having a great day and nothing can go wrong.",
+        "Who? Me? I didn't do anything.",
         "Oh. What's that?",
+        "Who's on trial?",
+        "I'm on trial?",
+        "I'm guilty?",
         "No. I don't believe it.",
         "Ahh. Help!!",
-        "Glugg."
+        "Glugg.",
+        "The End,"
       ],
-      numGuesses: 0 
+      numFailedGuesses: 0 
       }
       this.onClick = this.onClick.bind(this);
       this.letterClicked = this.letterClicked.bind(this); 
@@ -88,6 +97,8 @@ class App extends Component{
         }
       }
       console.log("this letter is in apple: ", e)
+    } else{
+      this.setState({numFailedGuesses: this.state.numFailedGuesses+1})
     }
 
     this.setState(prevState => {
@@ -118,14 +129,19 @@ class App extends Component{
       <div className="App">
         <a href="https://github.com/login/oauth/authorize?client_id=6299af3a88a73b2fd148">Login with Github</a>
         <h1>Hangman X</h1>
+        <Clue clue={this.state.clue}/>
         <button onClick={this.onClick}>Send color to everyone</button>
         <button id="blue" onClick={() => this.setColor('blue')}>Blue</button>
         <button id="red" onClick={() => this.setColor('red')}>Red</button>
+        <HangViewer
+          hang={this.state.hang}
+          numFailedGuesses={this.state.numFailedGuesses}
+        />
         <LetterWrapper 
-        letters={this.state.letters} 
-        letterClicked = {this.letterClicked}
-        answer={this.state.answer}
-        disp={this.state.disp}/>
+          letters={this.state.letters} 
+          letterClicked = {this.letterClicked}
+          answer={this.state.answer}
+          disp={this.state.disp}/>
       </div>
     );
   }
