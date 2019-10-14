@@ -6,19 +6,19 @@ class AnswerViewer extends Component {
   }
 
   render() {
-    console.log('answer is', this.props.answer);
+    console.log('disp is', this.props.disp);
 
     // generate our array of string characters
-    let answerCharArray = [];
-    for (let i = 0; i < this.props.answer.length; i += 1) {
-      answerCharArray.push(<span
+    let dispCharArray = [];
+    for (let i = 0; i < this.props.disp.length; i += 1) {
+      dispCharArray.push(<span
         className='answerLetter'
-        key={'answer_letter'+ i}>{this.props.answer[i]}</span>)
+        key={'answer_letter'+ i}>{this.props.disp[i]}</span>)
     }
 
     return (
     <div>
-      {answerCharArray}
+      {this.props.disp}
     </div>
     )
   }
