@@ -48,7 +48,14 @@ class App extends Component{
         'z': false,
       },
       answer: ['a', 'p', 'p', 'l', 'e'],
-      disp: ['_', '_', '_', '_', '_'] 
+      disp: ['_', '_', '_', '_', '_'],
+      hang: ["Who? Me? I didn't do anything.",
+        "Oh. What's that?",
+        "No. I don't believe it.",
+        "Ahh. Help!!",
+        "Glugg."
+      ],
+      numGuesses: 0 
       }
       this.onClick = this.onClick.bind(this);
       this.letterClicked = this.letterClicked.bind(this); 
