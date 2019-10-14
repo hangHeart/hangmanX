@@ -187,3 +187,11 @@ class App extends Component{
 }
 
 export default hot(module)(App);
+
+/**
+ *  "serve": "nodemon server/server.js",
+    "dev": "npm run serve & webpack-dev-server --mode development --open",
+    "start": "node server/server.js",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+ */
