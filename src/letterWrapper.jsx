@@ -9,7 +9,7 @@ class LetterWrapper extends Component {
 
   render() {
     return (
-      <div>
+      <div className="letterWrapper">
         <AnswerViewer 
         answer={this.props.answer}
         disp={this.props.disp}
