@@ -4,7 +4,8 @@
   "description": "collaborative, web-socket based hangman",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js"  
+    "start": "node server/server.js",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",

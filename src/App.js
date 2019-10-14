@@ -76,7 +76,7 @@ class App extends Component{
     }
       this.gameEnded = this.gameEnded.bind(this);
       this.letterClicked = this.letterClicked.bind(this);
-      this.socket = io.connect("http://localhost:80");
+      this.socket = io.connect("https://hangmanx-cs.herokuapp.com");
     }
 
   componentDidMount() {
