@@ -11,9 +11,12 @@ class LetterWrapper extends Component {
     return (
       <div>
         <AnswerViewer 
-        answer={this.props.answer}/>
+        answer={this.props.answer}
+        disp={this.props.disp}
+        />
         <LetterSelector 
         letters={this.props.letters} 
+        disp={this.props.disp}
         letterClicked ={this.props.letterClicked}
         />
       </div>

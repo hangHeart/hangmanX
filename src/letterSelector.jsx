@@ -12,7 +12,7 @@ class LetterSelector extends Component {
     const letterObj = this.props.letters
     const letterArr = Object.keys(letterObj);
     // console.log('letterArr is', letterArr);
-
+    console.log("disp: ",this.props.disp)
     // generate buttons for each letter
     let letterButtonArr = [];
     for (let i = 0; i < letterArr.length; i += 1) {

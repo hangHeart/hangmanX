@@ -68,11 +68,27 @@ class App extends Component{
   letterClicked(e) {
     console.log('letter clicked was:', e);
     // https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
+
+    if(this.state.answer.includes(e)){
+      for (let i = 0; i < this.state.answer.length; i++){
+        if(this.state.answer[i] === e){
+
+          this.setState(prevState => {
+            let disp = prevState.disp.slice(); 
+            disp[i] = e;
+            return {disp};
+          })
+        }
+      }
+      console.log("this letter is in apple: ", e)
+    }
+
     this.setState(prevState => {
       let letters = Object.assign({}, prevState.letters);  // creating copy of state variable jasper
       letters[e] = true;                     // update the name property, assign a new value                 
       return { letters };                                 // return new object jasper object
     })
+    //console.log("state: ",this.state)
   }
 
   setColor(color){
@@ -101,7 +117,8 @@ class App extends Component{
         <LetterWrapper 
         letters={this.state.letters} 
         letterClicked = {this.letterClicked}
-        answer={this.state.answer}/>
+        answer={this.state.answer}
+        disp={this.state.disp}/>
       </div>
     );
   }
