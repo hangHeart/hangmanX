@@ -26,9 +26,9 @@ app.get('/api/auth/github/callback',
   authController.getTokenJSON,
   authController.getUserProfile,
   authController.createUser,
-  cookieController.setUserIDCookie
+  cookieController.setUserIDCookie,
+  authController.redirectAfterLogin
 );
-
 
 app.get('/user/profile', cookieController.getInfofromCookie);
 
@@ -37,13 +37,8 @@ server.listen(PORT, () => {
 });
 
 io.on('connection', function (socket) {
-
   socket.on("clickedLetter", function (letter) {
     console.log("recived", letter);
     io.sockets.emit("clickedLetter", letter);
-  });
-
-  socket.on("changeColor", function (color) {
-    io.sockets.emit('changeColor', color);
   });
 })
