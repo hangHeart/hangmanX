@@ -40,6 +40,10 @@ auth.getUserProfile = (req, res, next) => {
   });
 }
 
+auth.redirectAfterLogin = (req, res, next) => {
+  res.redirect('http://localhost:3000/loggedin');
+}
+
 auth.createUser = (req, res, next) => {
 
   const userProfile = res.locals.userProfile;

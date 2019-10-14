@@ -26,9 +26,9 @@ app.get('/api/auth/github/callback',
   authController.getTokenJSON,
   authController.getUserProfile,
   authController.createUser,
-  cookieController.setUserIDCookie
+  cookieController.setUserIDCookie,
+  authController.redirectAfterLogin
 );
-
 
 app.get('/user/profile', cookieController.getInfofromCookie);
 
