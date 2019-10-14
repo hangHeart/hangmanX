@@ -9,7 +9,7 @@ const fetch = require('node-fetch');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const PORT = 8080;
+const PORT = process.env.PORT || 80;
 
 const authController = require('./authController.js');
 const cookieController = require('./cookieController.js');
