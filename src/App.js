@@ -68,7 +68,7 @@ class App extends Component{
   letterClicked(e) {
     console.log('letter clicked was:', e);
 
-    https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
+    // https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
     this.setState(prevState => {
       let letters = Object.assign({}, prevState.letters);  // creating copy of state variable jasper
       letters[e] = true;                     // update the name property, assign a new value                 
@@ -94,6 +94,7 @@ class App extends Component{
 
     return(
       <div className="App">
+        <a href="https://github.com/login/oauth/authorize?client_id=6299af3a88a73b2fd148">Login with Github</a>
         <h1>Hangman X</h1>
         <button onClick={this.onClick}>Send color to everyone</button>
         <button id="blue" onClick={() => this.setColor('blue')}>Blue</button>
