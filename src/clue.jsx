@@ -7,7 +7,7 @@ class Clue extends Component {
 
   render() {
     return (
-      <div>
+      <div className="clue">
        {this.props.clue}
       </div>
     )

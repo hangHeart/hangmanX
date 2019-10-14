@@ -50,16 +50,22 @@ class App extends Component{
       },
       gameStore: [
         [["It is the thing you might cut yourself on if you reach out to touch the world like a ball"],
-        ['m', 'o', 'u', 'n', 't', 'a', 'i', 'n'],
-        ['_', '_', '_', '_', '_', '_', '_', '_']],
-        [],
-        [],
-        [],
-        []
+        ['m','o','u','n','t','a','i','n'],
+        ['_','_','_','_','_','_','_','_']],
+
+
+        [["It's breezy."],
+        ["f","l","i","g","h","t","y"],
+        ["_","_","_","_","_","_","_"]],
+
+
+        [["It hangs in the sky, before it falls, but you do not want to avoid it."],
+          ['a', 'p', 'p', 'l', 'e'],
+          ['_', '_', '_', '_', '_']]
       ],
-      clue: "It hangs in the sky, before it falls, but you do not want to avoid it.",
-      answer: ['a', 'p', 'p', 'l', 'e'],
-      disp: ['_', '_', '_', '_', '_'],
+      clue: "loading",
+      answer: [],
+      disp: [],
       hang: [
         "I'm having a great day and nothing can go wrong.",
         "Who? Me? I didn't do anything.",
@@ -104,6 +110,12 @@ class App extends Component{
         this.setState({numFailedGuesses: this.state.numFailedGuesses+1})
       }
     });
+
+    const index = Math.floor(Math.random()*3)
+    this.setState({clue : this.state.gameStore[index][0],
+                    answer: this.state.gameStore[index][1],
+                    disp : this.state.gameStore[index][2]})
+
 
   }
 

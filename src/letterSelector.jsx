@@ -28,7 +28,7 @@ class LetterSelector extends Component {
     }
 
     return (
-      <div>
+      <div className="letterButtons">
         {letterButtonArr}
       </div>
     )
