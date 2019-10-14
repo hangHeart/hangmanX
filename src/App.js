@@ -67,7 +67,6 @@ class App extends Component{
   // change state when letter is selected
   letterClicked(e) {
     console.log('letter clicked was:', e);
-
     // https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
     this.setState(prevState => {
       let letters = Object.assign({}, prevState.letters);  // creating copy of state variable jasper
