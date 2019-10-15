@@ -4,12 +4,11 @@ const express = require('express')
 const app = express();
 const server = require('http').Server(app);
 let io = require('socket.io')(server)
-
-const fetch = require('node-fetch');
+const wordCtrl = require('./wordController.js');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 3000;
 
 const authController = require('./authController.js');
 const cookieController = require('./cookieController.js');
