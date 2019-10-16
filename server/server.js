@@ -20,6 +20,8 @@ app.get('/api', (req, res) => {
   console.log("api endpoint");
   return res.status(200).json({ 'hello': true });
 });
+app.get('/word', wordCtrl.getWordAndClue);
+
 
 // app.get('/create', authController.createDummy);
 
@@ -38,6 +40,8 @@ app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
 app.use('/', (req, res, next) => {
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 });
+
+
 
 app.get('/user/profile', cookieController.getInfofromCookie);
 
