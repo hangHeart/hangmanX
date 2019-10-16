@@ -59,7 +59,7 @@ class gameRoom extends Component {
           "I'm guilty?",
           "Ahh. Help!!",
           "Glugg.",
-          "The End,"
+          "The End."
         ].reverse(),
         numGuesses: 7
       }
