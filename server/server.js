@@ -13,8 +13,14 @@ const PORT = process.env.PORT || 3000;
 const authController = require('./authController.js');
 const cookieController = require('./cookieController.js');
 
+const userCtrl = require('./userController');
+
 app.use(bodyParser.json());
 app.use(cookieParser());
+
+// for testing userCtrl on Postman
+app.post('/login', userCtrl.addUser);
+app.put('/update/:score', userCtrl.updateUser);
 
 app.get('/api', (req, res) => {
   console.log('api endpoint');

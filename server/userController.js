@@ -3,12 +3,15 @@ const userCtrl = {};
 
 userCtrl.addUser = (request, response) => {
   const { name, password } = request.body;
+  // console.log('request.body', request.body);
+
   const text = 'INSERT INTO users (name, password) VALUES ($1, $2)';
+  //  WHERE NOT EXISTS (SELECT * FROM users WHERE name=$1 password=$2)
   client.query(text, [name, password], (err, result) => {
     if (err) console.log('addUser error', err);
     else {
       response.status(201).send(`User added: ${result}`);
-      console.log('user added =>', result);
+      console.log('user added =>');
     }
   });
 };
@@ -29,13 +32,14 @@ userCtrl.updateUser = (request, response) => {
   const { name, password } = request.body;
 
   client.query(
-    'UPDATE users SET name = $1, password = $2 WHERE score = $3',
+    'UPDATE users SET score = $3 WHERE name = $1 AND password = $2',
     [name, password, score],
     (error, results) => {
       if (error) {
         throw error;
       }
       response.status(200).send(`User Score Updated: ${score}`);
+      console.log('score updated:', score);
     }
   );
 };
