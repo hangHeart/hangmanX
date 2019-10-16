@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { hot } from "react-hot-loader";
+import React, { Component } from 'react';
+import { hot } from 'react-hot-loader';
 import io from 'socket.io-client';
-import "./App.css";
-import {Route, Link} from 'react-router-dom';
+import './App.css';
+import { Route, Link } from 'react-router-dom';
 import LetterWrapper from './letterWrapper';
 import Clue from './clue';
 import HangViewer from './hangViewer';
@@ -48,21 +48,6 @@ class gameRoom extends Component {
           'y': false,
           'z': false,
         },
-        gameStore: [
-          [["It is the thing you might cut yourself on if you reach out to touch the world like a ball"],
-          ['m','o','u','n','t','a','i','n'],
-          ['_','_','_','_','_','_','_','_']],
-  
-  
-          [["It's breezy."],
-          ["f","l","i","g","h","t","y"],
-          ["_","_","_","_","_","_","_"]],
-  
-  
-          [["It hangs in the sky, before it falls, but you do not want to avoid it."],
-            ['a', 'p', 'p', 'l', 'e'],
-            ['_', '_', '_', '_', '_']]
-        ],
         clue: "loading",
         answer: ["Waiting..."],
         disp: ["-"],
@@ -119,13 +104,6 @@ class gameRoom extends Component {
           this.setState({numFailedGuesses: this.state.numFailedGuesses+1})
         }
       });
-  
-      // const index = Math.floor(Math.random()*3)
-      // this.setState({clue : this.state.gameStore[index][0],
-      //                 answer: this.state.gameStore[index][1],
-      //                 disp : this.state.gameStore[index][2]})
-  
-  
     }
   
     componentDidUpdate() {
@@ -157,24 +135,28 @@ class gameRoom extends Component {
       if(this.state.answer.includes(e)){
         for (let i = 0; i < this.state.answer.length; i++){
           if(this.state.answer[i] === e){
-  
             this.setState(prevState => {
-              let disp = prevState.disp.slice(); 
+              let disp = prevState.disp.slice();
               disp[i] = e;
-              return {disp};
-            })
+              return { disp };
+            });
           }
         }
         // console.log("this letter is in apple: ", e)
       }
-    
-  
-      this.setState(prevState => {
-        let letters = Object.assign({}, prevState.letters);  // creating copy of state variable jasper
-        letters[e] = true;                     // update the name property, assign a new value                 
-        return { letters };                                 // return new object jasper object
-      })
-  
+  }
+
+  componentDidUpdate() {
+    this.gameEnded();
+  }
+
+  gameEnded() {
+    console.log('triggered');
+    // check for failure case
+    const maxFailedGuesses = this.state.hang.length - 1;
+    console.log('max failed gusses', maxFailedGuesses);
+    if (this.state.numFailedGuesses === maxFailedGuesses) {
+      alert(' game over');
     }
   
     render() {
@@ -205,8 +187,43 @@ class gameRoom extends Component {
         </div>
       );
     }
+
+    this.setState(prevState => {
+      let letters = Object.assign({}, prevState.letters); // creating copy of state variable jasper
+      letters[e] = true; // update the name property, assign a new value
+      return { letters }; // return new object jasper object
+    });
   }
 
+  render() {
+    console.log('letters state after rendering is', this.state.letters);
 
+    this.socket.on('changeColor', col => {
+      document.body.style.backgroundColor = col;
+    });
+
+    return (
+      <div className="gameRoom">
+        <a href="https://github.com/login/oauth/authorize?client_id=6299af3a88a73b2fd148">
+          Login with Github
+        </a>
+        <h1>Hangman X</h1>
+        <h2>Hey handsomeeeeeee ;)</h2>
+        <h3>Stop looking at our screen </h3>
+        <Clue clue={this.state.clue} />
+        <HangViewer
+          hang={this.state.hang}
+          numFailedGuesses={this.state.numFailedGuesses}
+        />
+        <LetterWrapper
+          letters={this.state.letters}
+          letterClicked={this.letterClicked}
+          answer={this.state.answer}
+          disp={this.state.disp}
+        />
+      </div>
+    );
+  }
+}
 
 export default gameRoom;

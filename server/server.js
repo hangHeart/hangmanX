@@ -1,9 +1,9 @@
 //https://socket.io/docs/
 const path = require('path');
-const express = require('express')
+const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-let io = require('socket.io')(server)
+let io = require('socket.io')(server);
 const wordCtrl = require('./wordController.js');
 
 const bodyParser = require('body-parser');
@@ -13,19 +13,25 @@ const PORT = process.env.PORT || 3000;
 const authController = require('./authController.js');
 const cookieController = require('./cookieController.js');
 
+const userCtrl = require('./userController');
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+// for testing userCtrl on Postman
+app.post('/login', userCtrl.addUser);
+app.put('/update/:score', userCtrl.updateUser);
+
 app.get('/api', (req, res) => {
-  console.log("api endpoint");
-  return res.status(200).json({ 'hello': true });
+  console.log('api endpoint');
+  return res.status(200).json({ hello: true });
 });
 app.get('/word', wordCtrl.getWordAndClue);
 
-
 // app.get('/create', authController.createDummy);
 
-app.get('/api/auth/github/callback',
+app.get(
+  '/api/auth/github/callback',
   authController.getTokenJSON,
   authController.getUserProfile,
   authController.createUser,

@@ -2,28 +2,26 @@ const client = require('./wordModel.js');
 const wordCtrl = {};
 
 wordCtrl.addWordAndClue = values => {
-  const text =
-    "INSERT INTO words (word, clue) VALUES ($1, $2)";
-    client.query(text, values, (err, result) => {
-    if (err) console.log("ROW error", err);
+  const text = 'INSERT INTO words (word, clue) VALUES ($1, $2)';
+  client.query(text, values, (err, result) => {
+    if (err) console.log('ROW error', err);
     else {
       // console.log("");
     }
   });
-}
+};
 
 wordCtrl.getWordAndClue = (req, res, next) => {
-    const text = "SELECT word, clue FROM words ORDER BY RANDOM() LIMIT 1";
-    client.query(text, (err, result) => {
-      if (err){
-        console.log("ROW error", err);
-      }else{
-        // console.log(result);
-        res.json(result.rows[0]);
-      }
-      
+  const text = 'SELECT word, clue FROM words ORDER BY RANDOM() LIMIT 1';
+  client.query(text, (err, result) => {
+    if (err) {
+      console.log('ROW error', err);
+    } else {
+      // console.log(result);
+      res.json(result.rows[0]);
+    }
   });
-}
+};
 // const fs = require('fs')
 // const path = require('path');
 // // const wordCtrl = require('/wordController.js');

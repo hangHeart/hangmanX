@@ -8,20 +8,22 @@ const client = new Client({
   port: 5432,
 });
 client.connect();
-const table = "CREATE TABLE IF NOT EXISTS words (_id SERIAL PRIMARY KEY, word VARCHAR, clue VARCHAR)";
+const table =
+  'CREATE TABLE IF NOT EXISTS words (_id SERIAL PRIMARY KEY, word VARCHAR, clue VARCHAR)';
 client.query(table, (err, result) => {
-    if (err) console.log("FIRST error", err);
-    else {
-      console.log('Word ');
-    }
+  if (err) console.log('FIRST error', err);
+  else {
+    console.log('Word ');
+  }
 });
 
-const newTable = "CREATE TABLE IF NOT EXISTS users (_id SERIAL PRIMARY KEY, name VARCHAR, password VARCHAR, score INT)";
+const newTable =
+  'CREATE TABLE IF NOT EXISTS users (_id SERIAL PRIMARY KEY, name VARCHAR, password VARCHAR, score INT)';
 client.query(newTable, (err, result) => {
-    if (err) console.log("FIRST error", err);
-    else {
-      console.log('User ');
-    }
+  if (err) console.log('FIRST error', err);
+  else {
+    console.log('User ');
+  }
 });
 
-module.exports = client
+module.exports = client;

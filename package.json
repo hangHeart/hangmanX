@@ -36,7 +36,10 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
+<<<<<<< HEAD
     "file-loader": "^4.2.0",
+=======
+>>>>>>> 8bea47b5ec44b36ced520b0d1fbfce5b336f007d
     "fs": "0.0.1-security",
     "node-fetch": "^2.6.0",
     "nodemon": "^1.19.3",
