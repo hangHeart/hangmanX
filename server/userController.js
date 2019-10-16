@@ -16,6 +16,20 @@ userCtrl.addUser = (request, response) => {
   });
 };
 
+userCtrl.verifyUser = (request, response) => {
+  const { name, password } = request.body;
+  // console.log('request.body', request.body);
+
+  const text = 'SELECT COUNT(*) FROM users WHERE (name=$1 AND password=$2)';
+  client.query(text, [name, password], (err, result) => {
+    if (err) console.log('addUser error', err);
+    else {
+      response.status(201).send(`User verified: ${result}`);
+      console.log('user VERIFIED', result.rowCount);
+    }
+  });
+};
+
 userCtrl.getTopTen = (request, response) => {
   const text = 'SELECT * FROM users ORDER BY score LIMIT 10';
   client.query(text, [score], (err, result) => {

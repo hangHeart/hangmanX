@@ -11,17 +11,16 @@ button {
   background-color: lightblue;
 }
 
-.Login{
-  display:grid;
-  justify-content:center;
+.Login {
+  display: grid;
+  justify-content: center;
   background-color: lightgrey;
-  font-family:Comic sans-serif;
+  font-family: Comic sans-serif;
 }
 
-.Logo{
-  display:flex;
-  width:80%;
-
+.Logo {
+  display: flex;
+  width: 80%;
 }
 .letterButton {
   margin-top: 2%;
@@ -33,16 +32,13 @@ button {
 }
 
 .letterButton:disabled {
-
   background-color: gray;
-
 }
 
 .letterWrapper {
   /* width: 50%; */
   margin-left: 10%;
-  margin-right: 10%
-
+  margin-right: 10%;
 }
 
 #answerViewer {
@@ -70,20 +66,13 @@ h1 {
   text-align: center;
   background-color: burlywood;
   border: 5px solid #dac292;
-  
-  
 }
 
 .letterButtons {
   display: table;
   text-align: center;
-
 }
 
 .letterButton:hover {
   box-shadow: 2px 2px darkgray;
 }
-
-
-
-

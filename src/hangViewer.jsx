@@ -1,17 +1,17 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class HangViewer extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
-      // console.log("guesses:", this.props.numFailedGuesses)
+    // console.log("guesses:", this.props.numFailedGuesses)
     return (
       <div className="hangviewer">
-       {this.props.hang[this.props.numFailedGuesses]}
+        {this.props.hang[this.props.numFailedGuesses]}
       </div>
-    )
+    );
   }
 }
 
