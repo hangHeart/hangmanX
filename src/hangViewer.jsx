@@ -9,7 +9,8 @@ class HangViewer extends Component {
     // console.log("guesses:", this.props.numFailedGuesses)
     return (
       <div className="hangviewer">
-        {this.props.hang[this.props.numFailedGuesses]}
+        {this.props.hang[this.props.numGuesses]} <br />
+        {`Number of Guesses: ${this.props.numGuesses}`}
       </div>
     );
   }
