@@ -137,7 +137,6 @@ class gameRoom extends Component{
       }
     }
   
-  
     // change state when letter is selected
     letterClicked(e) {
   
@@ -159,9 +158,7 @@ class gameRoom extends Component{
         }
         console.log("this letter is in apple: ", e)
       }
-      // else {
-      //   this.setState({numFailedGuesses: this.state.numFailedGuesses+1})
-      // }
+    
   
       this.setState(prevState => {
         let letters = Object.assign({}, prevState.letters);  // creating copy of state variable jasper
@@ -181,9 +178,6 @@ class gameRoom extends Component{
       
       return(
         <div className="gameRoom">
-          {/* //this is the route to login page using one component
-          //To Do: Game Lobby path = '/gameLobby'
-          //To Do: Game should be one route path = '/' */}
           
           <a href="https://github.com/login/oauth/authorize?client_id=6299af3a88a73b2fd148">Login with Github</a>
           <h1>Hangman X</h1>
@@ -204,90 +198,6 @@ class gameRoom extends Component{
     }
   }
 
-// class Clue extends Component {
-//     constructor(props) {
-//       super(props)
-//     }
-  
-//     render() {
-//       return (
-//         <div className="clue">
-//          {this.props.clue}
-//         </div>
-//       )
-//     }
-//   }
 
-//   class HangViewer extends Component {
-//     constructor(props) {
-//       super(props)
-//     }
-  
-//     render() {
-//         console.log("guesses:", this.props.numFailedGuesses)
-//       return (
-//         <div className="hangviewer">
-//          {this.props.hang[this.props.numFailedGuesses]}
-//         </div>
-//       )
-//     }
-//   }
-
-//   class LetterSelector extends Component {
-//     constructor(props) {
-//       super(props)
-//     }
-  
-//     render() {
-  
-//       // see what props/state we're getting
-//       console.log('props letters are', this.props.letters)
-//       const letterObj = this.props.letters
-//       const letterArr = Object.keys(letterObj);
-//       // console.log('letterArr is', letterArr);
-//       console.log("disp: ",this.props.disp)
-//       // generate buttons for each letter
-//       let letterButtonArr = [];
-//       for (let i = 0; i < letterArr.length; i += 1) {
-//           console.log(letterObj[letterArr[i]])
-//           letterButtonArr.push(<button 
-//             key={letterArr[i] + '_button'} 
-//             className='letterButton' disabled={letterObj[letterArr[i]] ? "disabled" : null}
-//             onClick = {
-//             () => {
-//               this.props.letterClicked(letterArr[i]);
-//             }
-//           }>{letterArr[i]}</button>)
-//       }
-  
-//       return (
-//         <div className="letterButtons">
-//           {letterButtonArr}
-//         </div>
-//       )
-//     }
-//   }
-
-//   class LetterWrapper extends Component {
-//     constructor(props) {
-//       super(props)
-//     }
-  
-//     render() {
-//       return (
-//         <div className="letterWrapper">
-//           <AnswerViewer 
-//           answer={this.props.answer}
-//           disp={this.props.disp}
-//           />
-//           <LetterSelector 
-//           letters={this.props.letters} 
-//           disp={this.props.disp}
-//           letterClicked ={this.props.letterClicked}
-//           />
-//         </div>
-//       )
-//     }
-//   }
 
 export default gameRoom;
