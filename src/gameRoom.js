@@ -49,19 +49,7 @@ class gameRoom extends Component{
           'z': false,
         },
         gameStore: [
-          [["It is the thing you might cut yourself on if you reach out to touch the world like a ball"],
-          ['m','o','u','n','t','a','i','n'],
-          ['_','_','_','_','_','_','_','_']],
-  
-  
-          [["It's breezy."],
-          ["f","l","i","g","h","t","y"],
-          ["_","_","_","_","_","_","_"]],
-  
-  
-          [["It hangs in the sky, before it falls, but you do not want to avoid it."],
-            ['a', 'p', 'p', 'l', 'e'],
-            ['_', '_', '_', '_', '_']]
+          
         ],
         clue: "loading",
         answer: [],
@@ -86,6 +74,15 @@ class gameRoom extends Component{
       }
   
     componentDidMount() {
+      // TODO: fetch clue here
+      fetch('/word')
+      .then(res => res.json())
+      .then(data => {
+        let disp = data.word.replace(/[a-z]/gi, "-");
+        const { word, clue} = data;
+        let gameStore = [clue, word, disp];
+        this.setState({gameStore});
+      })
       this.socket.on('connect', function () {
         console.log("connected");
       });
@@ -111,10 +108,10 @@ class gameRoom extends Component{
         }
       });
   
-      const index = Math.floor(Math.random()*3)
-      this.setState({clue : this.state.gameStore[index][0],
-                      answer: this.state.gameStore[index][1],
-                      disp : this.state.gameStore[index][2]})
+      // const index = Math.floor(Math.random()*3)
+      this.setState({clue : this.state.gameStore[0],
+                      answer: this.state.gameStore[1],
+                      disp : this.state.gameStore[2]})
   
   
     }
