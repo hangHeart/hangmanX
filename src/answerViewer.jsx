@@ -6,7 +6,7 @@ class AnswerViewer extends Component {
   }
 
   render() {
-    console.log('disp is', this.props.disp);
+    // console.log('disp is', this.props.disp);
 
     // generate our array of string characters
     let dispCharArray = [];
