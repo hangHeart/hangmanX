@@ -35,11 +35,7 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
-<<<<<<< HEAD
-    "file-loader": "^4.2.0",
-=======
     "fs": "0.0.1-security",
->>>>>>> 7f08c8201c7a416552ea398687ac84b5bf08895c
     "node-fetch": "^2.6.0",
     "nodemon": "^1.19.3",
     "pg": "^7.12.1",

@@ -1,10 +1,10 @@
-const client = require("./wordModel.js");
+const client = require('./wordModel.js');
 const wordCtrl = {};
 
 wordCtrl.addWordAndClue = values => {
-  const text = "INSERT INTO words (word, clue) VALUES ($1, $2)";
+  const text = 'INSERT INTO words (word, clue) VALUES ($1, $2)';
   client.query(text, values, (err, result) => {
-    if (err) console.log("ROW error", err);
+    if (err) console.log('ROW error', err);
     else {
       // console.log("");
     }
@@ -12,10 +12,10 @@ wordCtrl.addWordAndClue = values => {
 };
 
 wordCtrl.getWordAndClue = (req, res, next) => {
-  const text = "SELECT word, clue FROM words ORDER BY RANDOM() LIMIT 1";
+  const text = 'SELECT word, clue FROM words ORDER BY RANDOM() LIMIT 1';
   client.query(text, (err, result) => {
     if (err) {
-      console.log("ROW error", err);
+      console.log('ROW error', err);
     } else {
       // console.log(result);
       res.json(result.rows[0]);
