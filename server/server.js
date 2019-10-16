@@ -40,6 +40,12 @@ app.use('/', (req, res, next) => {
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 });
 
+// app.use('/game', (req,res) =>{
+//   res
+//   .status(200)
+//   .send()
+// })
+
 app.get('/user/profile', cookieController.getInfofromCookie);
 
 server.listen(PORT, () => {

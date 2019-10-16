@@ -11,8 +11,18 @@ button {
   background-color: lightblue;
 }
 
+.Login{
+  display:grid;
+  justify-content:center;
+  background-color: lightgrey;
+  font-family:Comic sans-serif;
+}
 
+.Logo{
+  display:flex;
+  width:80%;
 
+}
 .letterButton {
   margin-top: 2%;
   background-color: blueviolet;
