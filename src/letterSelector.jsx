@@ -20,11 +20,8 @@ class LetterSelector extends Component {
         letterButtonArr.push(<button 
           key={letterArr[i] + '_button'} 
           className='letterButton' disabled={letterObj[letterArr[i]] ? "disabled" : null}
-          onClick = {
-          () => {
-            this.props.letterClicked(letterArr[i]);
-          }
-        }>{letterArr[i]}</button>)
+          onClick = { () => this.props.letterClicked(letterArr[i]) }
+        >{letterArr[i]}</button>)
     }
 
     return (
