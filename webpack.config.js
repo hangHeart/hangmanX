@@ -41,6 +41,9 @@ module.exports = {
       '/api': {
         target: "http://localhost:4000",
         changeOrigin: true,
+      },
+      '/word': {
+        target: "http://localhost:3000",
       }
     },
     disableHostCheck: true,

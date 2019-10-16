@@ -8,7 +8,7 @@ import Clue from './clue';
 import HangViewer from './hangViewer';
 // import { isUserWhitespacable } from "@babel/types";
 
-class gameRoom extends Component{
+class gameRoom extends Component {
 
     constructor(props) {
       super(props);
@@ -49,11 +49,23 @@ class gameRoom extends Component{
           'z': false,
         },
         gameStore: [
-          
+          [["It is the thing you might cut yourself on if you reach out to touch the world like a ball"],
+          ['m','o','u','n','t','a','i','n'],
+          ['_','_','_','_','_','_','_','_']],
+  
+  
+          [["It's breezy."],
+          ["f","l","i","g","h","t","y"],
+          ["_","_","_","_","_","_","_"]],
+  
+  
+          [["It hangs in the sky, before it falls, but you do not want to avoid it."],
+            ['a', 'p', 'p', 'l', 'e'],
+            ['_', '_', '_', '_', '_']]
         ],
         clue: "loading",
-        answer: [],
-        disp: [],
+        answer: ["Waiting..."],
+        disp: ["-"],
         hang: [
           "I'm having a great day and nothing can go wrong.",
           "Who? Me? I didn't do anything.",
@@ -70,22 +82,22 @@ class gameRoom extends Component{
       }
         this.gameEnded = this.gameEnded.bind(this);
         this.letterClicked = this.letterClicked.bind(this);
-        this.socket = io.connect("https://hangmanx-cs.herokuapp.com");
+        this.socket = io.connect('http://localhost:3000/');
       }
   
     componentDidMount() {
-      // TODO: fetch clue here
+      this.socket.on('connect', function () {
+        // console.log("connected");
+      });
       fetch('/word')
       .then(res => res.json())
       .then(data => {
-        let disp = data.word.replace(/[a-z]/gi, "-");
-        const { word, clue} = data;
-        let gameStore = [clue, word, disp];
-        this.setState({gameStore});
+        // console.log(data);
+        const { word, clue } = data;
+        const answer = word.split('');
+        const disp = word.replace(/[a-z]/gi, "-").split('');
+        this.setState({clue : clue, answer: answer, disp : disp});
       })
-      this.socket.on('connect', function () {
-        console.log("connected");
-      });
   
       this.socket.on('clickedLetter', (e) => {
         this.setState(prevState => {
@@ -109,9 +121,9 @@ class gameRoom extends Component{
       });
   
       // const index = Math.floor(Math.random()*3)
-      this.setState({clue : this.state.gameStore[0],
-                      answer: this.state.gameStore[1],
-                      disp : this.state.gameStore[2]})
+      // this.setState({clue : this.state.gameStore[index][0],
+      //                 answer: this.state.gameStore[index][1],
+      //                 disp : this.state.gameStore[index][2]})
   
   
     }
@@ -121,12 +133,12 @@ class gameRoom extends Component{
     }
   
     gameEnded() {
-      console.log('triggered');
+      // console.log('triggered');
       // check for failure case
       const maxFailedGuesses = this.state.hang.length - 1;
-      console.log('max failed gusses', maxFailedGuesses)
+      // console.log('max failed gusses', maxFailedGuesses)
       if (this.state.numFailedGuesses === maxFailedGuesses){
-        alert(" game over")
+        alert("game over")
       };
       // check for success case
       if(this.state.disp.join('') == this.state.answer.join('')) {
@@ -139,7 +151,7 @@ class gameRoom extends Component{
   
       this.socket.emit("clickedLetter", e);
   
-      console.log('letter clicked was:', e);
+      // console.log('letter clicked was:', e);
       // https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
   
       if(this.state.answer.includes(e)){
@@ -153,7 +165,7 @@ class gameRoom extends Component{
             })
           }
         }
-        console.log("this letter is in apple: ", e)
+        // console.log("this letter is in apple: ", e)
       }
     
   
@@ -167,7 +179,7 @@ class gameRoom extends Component{
   
     render() {
     
-      console.log('letters state after rendering is', this.state.letters)
+      // console.log('letters state after rendering is', this.state.letters)
   
       this.socket.on('changeColor', (col) => {
         document.body.style.backgroundColor = col
