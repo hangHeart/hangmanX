@@ -6,13 +6,13 @@ userCtrl.addUser = values => {
   client.query(text, values, (err, result) => {
     if (err) console.log('ROW error', err);
     else {
-      console.log('user added');
+      console.log('user added =>', result);
     }
   });
 };
 
 userCtrl.getUser = values => {
-  const test = 'SELECT * FROM users';
+  const text = 'SELECT * FROM users';
   client.query(text, values, (err, result) => {
     if (err) console.log('ROW error', err);
     else {
@@ -21,6 +21,6 @@ userCtrl.getUser = values => {
   });
 };
 
-userCtrl.addUser(['Andrew', 'Andrew', 1000]);
+userCtrl.addUser(['Andrew', 'Andrew']);
 
 module.exports = userCtrl;

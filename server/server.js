@@ -1,9 +1,9 @@
 //https://socket.io/docs/
 const path = require('path');
-const express = require('express')
+const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-let io = require('socket.io')(server)
+let io = require('socket.io')(server);
 const wordCtrl = require('./wordController.js');
 
 const bodyParser = require('body-parser');
@@ -17,13 +17,14 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.get('/api', (req, res) => {
-  console.log("api endpoint");
-  return res.status(200).json({ 'hello': true });
+  console.log('api endpoint');
+  return res.status(200).json({ hello: true });
 });
 
 // app.get('/create', authController.createDummy);
 
-app.get('/api/auth/github/callback',
+app.get(
+  '/api/auth/github/callback',
   authController.getTokenJSON,
   authController.getUserProfile,
   authController.createUser,
@@ -39,15 +40,19 @@ app.use('/', (req, res, next) => {
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 });
 
+app.use('/game', (req, res) => {
+  res.status(200).send();
+});
+
 app.get('/user/profile', cookieController.getInfofromCookie);
 
 server.listen(PORT, () => {
   console.log('Server listening on ', PORT);
 });
 
-io.on('connection', function (socket) {
-  socket.on("clickedLetter", function (letter) {
-    console.log("recived", letter);
-    io.sockets.emit("clickedLetter", letter);
+io.on('connection', function(socket) {
+  socket.on('clickedLetter', function(letter) {
+    console.log('recived', letter);
+    io.sockets.emit('clickedLetter', letter);
   });
-})
+});

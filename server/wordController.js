@@ -12,7 +12,7 @@ wordCtrl.addWordAndClue = values => {
 };
 
 wordCtrl.getWordAndClue = values => {
-  const test = 'SELECT word, clue FROM words ORDER BY RANDOM() LIMIT 1';
+  const text = 'SELECT word, clue FROM words ORDER BY RANDOM() LIMIT 1';
   client.query(text, values, (err, result) => {
     if (err) console.log('ROW error', err);
     else {
