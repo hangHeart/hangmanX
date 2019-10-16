@@ -42,7 +42,6 @@ app.use('/', (req, res, next) => {
 });
 
 
-
 app.get('/user/profile', cookieController.getInfofromCookie);
 
 server.listen(PORT, () => {
