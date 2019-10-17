@@ -18,8 +18,8 @@ class Login extends Component {
 
   handleSubmit(event) {
       const data = {username: this.state.username, password: this.state.password};
-    console.log('am I here in this universe');
-    fetch('http://localhost:3000/',{
+    // console.log('am I here in this universe');
+    fetch('http://localhost:3000/login',{
         method:'POST',
         headers:{
             'Content-Type':'application/json'
@@ -27,7 +27,7 @@ class Login extends Component {
         body:JSON.stringify(data)
     }).then(response => response.json())
     .then(data => {
-        console.log("we are outside the conditional ", data);
+        // console.log("we are outside the conditional ", data);
         
         if(data.username){
             this.setState({ redirectToGame: true })
@@ -46,14 +46,14 @@ class Login extends Component {
     //   console.log('testing here~', event.target)
     //   console.log('test2',event.target.value)
     this.setState({ username: event.target.value }, () => {
-      console.log('username test', this.state.username);
+      // console.log('username test', this.state.username);
     });
     //   event.preventDefault();
   }
 
   handlePasswordChange(event) {
      this.setState({ password: event.target.value }, () => {
-        console.log('password test', this.state.password);
+        // console.log('password test', this.state.password);
       });
    }
    
@@ -77,6 +77,7 @@ class Login extends Component {
                         <input type="submit" value="Submit" />
                     </label>
                 </form>
+                <a href="/signup">Sign up!</a>
             </div>
         </React.Fragment>
       );

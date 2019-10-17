@@ -32,18 +32,19 @@ userCtrl.getUser = async (req, res, next) => {
   });
 };
 
-userCtrl.addUser = (request, response) => {
+userCtrl.addUser = (request, response, next) => {
   const { name, password } = request.body;
-  // console.log('request.body', request.body);
+  console.log('request.body', request.body);
 
-  const text = 'INSERT INTO users (name, password) VALUES ($1, $2)';
+  const text = 'INSERT INTO users (name, password, score) VALUES ($1, $2, $3)';
   //  WHERE NOT EXISTS (SELECT * FROM users WHERE name=$1 password=$2)
-  client.query(text, [name, password], (err, result) => {
+  client.query(text, [name, password, 0], (err, result) => {
     if (err) console.log('addUser error', err);
     else {
-      response.status(201).send(`User added: ${result}`);
+      response.json({ success: true });
       console.log('user added =>');
     }
+    return next();
   });
 };
 
@@ -52,7 +53,7 @@ userCtrl.verifyUser = (request, response) => {
   // console.log('request.body', request.body);
 
   const text = 'SELECT COUNT(*) FROM users WHERE (name=$1 AND password=$2)';
-  client.query(text, [name, password], (err, result) => {
+  client.query(text, [name, password, 0], (err, result) => {
     if (err) console.log('addUser error', err);
     else {
       response.status(201).send(`User verified: ${result}`);

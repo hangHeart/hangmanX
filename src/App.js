@@ -6,6 +6,7 @@ import './App.css';
 // import Clue from './clue';
 // import HangViewer from './hangViewer';
 import Login from './login';
+import SignUp from './SignUp';
 //import Route AND links to to page --> if we make links that are clickable on page i.e sign-up
 import { Route, Link } from 'react-router-dom';
 import gameRoom from './gameRoom';
@@ -22,6 +23,7 @@ class App extends Component {
         {/* //this is the route to login page using one component
         //To Do: Game Lobby path = '/gameLobby'
         //To Do: Game should be one route path = '/' */}
+        <Route path="./signup" component={SignUp} />
         <Route exact path="/" component={Login} />
         <Route path="/game" component={gameRoom} />
       </div>
