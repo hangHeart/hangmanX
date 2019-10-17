@@ -72,19 +72,21 @@ userCtrl.getTopTen = (request, response) => {
 };
 
 userCtrl.updateUser = (request, response) => {
-  // need to get the actual score from somewhere
-  const score = parseInt(request.params.score);
+  // const score = parseInt(request.params.score);
   const { name, password } = request.body;
-
+  // SELECT ID, name, password, score+10 AS score from users
+  //'SELECT * FROM users WHERE name = ($1)';
+  //'UPDATE users SET score+10 WHERE name = $1 AND password = $2'
   client.query(
-    'UPDATE users SET score = $3 WHERE name = $1 AND password = $2',
-    [name, password, score],
+    `UPDATE users SET score = score+10 WHERE name = '${name}'`,
+    // [name, password, score],
     (error, results) => {
       if (error) {
         throw error;
+      } else {
+        response.status(200).send(`User Score Updated: ${results}`);
+        console.log('score updated =>');
       }
-      response.status(200).send(`User Score Updated: ${score}`);
-      console.log('score updated:', score);
     }
   );
 };

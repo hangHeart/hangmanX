@@ -104,8 +104,8 @@ class gameRoom extends Component {
     if (this.state.numGuesses === 0) {
       // alert('game over');
       swal({
-        title: 'You sucks!',
-        text: 'Come back and try again!',
+        title: 'Haha, you suck!!',
+        text: 'You have used up your last brain cell.',
         icon: 'error',
         button: 'Try again!',
       });
@@ -116,16 +116,20 @@ class gameRoom extends Component {
     // check for success case
     if (this.state.disp.join('') == this.state.answer.join('')) {
       // alert('success');
+      // fetch('/score')
+      //   .then(res => res.json())
+      //   .then(data => {
+      //     // const { name, score } = data;
+      //     // console.log('Name is, ', name);
+      //     console.log('Score is, ', data);
+      //   });
       swal({
         title: 'Well done!',
-        text: 'You success!',
+        text: 'You did it!!',
         icon: 'success',
-        button: 'Aww yiss!',
+        button: 'Rock N Roll!',
       });
       document.addEventListener('click', () => {
-        // document.getElementById('swal-button swal-button--confirm').innerHTML =
-        //   'Hello World';
-        // <button class="swal-button swal-button--confirm">Aww yiss!</button>
         window.location.href = '/game';
       });
     }

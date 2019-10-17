@@ -25,8 +25,9 @@ app.post('/', userCtrl.getUser, (req, res) => {
 
 // for testing userCtrl on Postman
 app.post('/login', userCtrl.addUser);
-app.put('/update/:score', userCtrl.updateUser);
+// app.put('/update/:score', userCtrl.updateUser);
 app.post('/verify', userCtrl.verifyUser);
+// app.put('/score', userCtrl.updateUser);
 
 app.get('/api', (req, res) => {
   console.log('api endpoint');
