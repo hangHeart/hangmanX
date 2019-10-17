@@ -6,6 +6,8 @@ import { Route, Link } from 'react-router-dom';
 import LetterWrapper from './letterWrapper';
 import Clue from './clue';
 import HangViewer from './hangViewer';
+import sweet from 'sweetalert';
+
 // import { isUserWhitespacable } from "@babel/types";
 
 class gameRoom extends Component {
@@ -100,11 +102,23 @@ class gameRoom extends Component {
     // check for failure case
     // console.log('max failed gusses', maxFailedGuesses)
     if (this.state.numGuesses === 0) {
-      alert('game over');
+      // alert('game over');
+      sweet({
+        title: 'You sucks!',
+        text: 'Come back and try again!',
+        icon: 'error',
+        button: 'Try again!',
+      });
     }
     // check for success case
     if (this.state.disp.join('') == this.state.answer.join('')) {
-      alert('success');
+      // alert('success');
+      sweet({
+        title: 'Well done!',
+        text: 'You success!',
+        icon: 'success',
+        button: 'Aww yiss!',
+      });
     }
   }
 
@@ -133,10 +147,13 @@ class gameRoom extends Component {
         {/* <a href="https://github.com/login/oauth/authorize?client_id=6299af3a88a73b2fd148">
           Login with Github
         </a> */}
-        <h1>Hangman X</h1>
+        <h1>Hang♥♥♥♥♥</h1>
         <h2>Hey handsomeeeeeee ;)</h2>
         {/* <h3>Stop looking at our screen </h3> */}
-        <img src={this.state.hangImgSrc[this.state.numGuesses]} />
+        <img
+          className="image"
+          src={this.state.hangImgSrc[this.state.numGuesses]}
+        />
         <Clue clue={this.state.clue} />
         <HangViewer hang={this.state.hang} numGuesses={this.state.numGuesses} />
         <LetterWrapper
