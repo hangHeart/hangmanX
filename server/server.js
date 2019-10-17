@@ -23,6 +23,17 @@ app.post('/login', userCtrl.getUser, (req, res) => {
   res.status(200).json(res.locals.getUser);
 });
 
+app.get('/highscore/topTen', userCtrl.getTopTen, (req, res) => {
+  res.status(200).json(res.locals.getTopTen);
+});
+
+//getting user for login
+
+//post to the database
+// app.post('/signup', userCtrl.addUser, (req, res) => {
+//   res.status(200).json(res.locals.madeUser);
+// });
+
 // for testing userCtrl on Postman
 app.post('/signup', userCtrl.addUser);
 // app.put('/update/:score', userCtrl.updateUser);
@@ -58,7 +69,13 @@ app.use('/', (req, res, next) => {
 //   res.status(200).send();
 // });
 
-app.get('/user/profile', cookieController.getInfofromCookie);
+// app.get('/user/profile', cookieController.getInfofromCookie);
+
+// (req,res) =>{
+//   res
+//   .status(320)
+//   .send('res.local.highScore')
+// })
 
 app.use((err, req, res, next) => {
   const defaultError = {

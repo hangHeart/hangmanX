@@ -2,18 +2,20 @@ import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 import io from 'socket.io-client';
 import './App.css';
-import { Route, Link } from 'react-router-dom';
+import { Route, Redirect, Link } from 'react-router-dom';
 import LetterWrapper from './letterWrapper';
 import Clue from './clue';
 import HangViewer from './hangViewer';
 import swal from 'sweetalert';
 
+import HighScore from './highScore';
 // import { isUserWhitespacable } from "@babel/types";
 
 class gameRoom extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      redirectToRankings: false,
       color: 'red',
       letters: {
         a: false,
@@ -74,6 +76,7 @@ class gameRoom extends Component {
     };
     this.gameEnded = this.gameEnded.bind(this);
     this.letterClicked = this.letterClicked.bind(this);
+    this.Rankings = this.Rankings.bind(this);
   }
 
   componentDidMount() {
@@ -154,7 +157,15 @@ class gameRoom extends Component {
     }
   }
 
+  Rankings(event) {
+    this.setState({ redirectToRankings: true });
+    event.preventDefault();
+  }
+
   render() {
+    const redirectToRankings = this.state.redirectToRankings;
+    if (redirectToRankings) return <Redirect to="/highscore" />;
+
     return (
       <div className="gameRoom" onKeyPress={e => this.letterClicked(e)}>
         {/* <a href="https://github.com/login/oauth/authorize?client_id=6299af3a88a73b2fd148">
@@ -175,6 +186,9 @@ class gameRoom extends Component {
           answer={this.state.answer}
           disp={this.state.disp}
         />
+        <button onClick={this.Rankings} className="RankingButton">
+          High Score
+        </button>
       </div>
     );
   }

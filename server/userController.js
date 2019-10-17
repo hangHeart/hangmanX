@@ -61,12 +61,16 @@ userCtrl.verifyUser = (request, response) => {
   });
 };
 
-userCtrl.getTopTen = (request, response) => {
-  const text = 'SELECT * FROM users ORDER BY score LIMIT 10';
-  client.query(text, [score], (err, result) => {
+userCtrl.getTopTen = (request, response, next) => {
+  console.log('test1');
+  // const {score} = request.body
+  const text = 'SELECT name, score FROM users ORDER BY score DESC';
+  client.query(text, (err, result) => {
     if (err) console.log('getTopTen error', err);
     else {
-      response.status(200).json(result);
+      // console.log('here are the results,', result.rows)
+      response.locals.getTopTen = result.rows;
+      return next();
     }
   });
 };

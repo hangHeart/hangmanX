@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 import io from 'socket.io-client';
 import './App.css';
+import HighScore from './highScore';
 // import LetterWrapper from './letterWrapper';
 // import Clue from './clue';
 // import HangViewer from './hangViewer';
@@ -26,6 +27,7 @@ class App extends Component {
         <Route path="/signup" component={SignUp} />
         <Route exact path="/" component={Login} />
         <Route path="/game" component={gameRoom} />
+        <Route path="/highScore" component={HighScore} />
       </div>
     );
   }
