@@ -19,12 +19,12 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 //getting user for login
-app.post('/', userCtrl.getUser, (req, res) => {
+app.post('/login', userCtrl.getUser, (req, res) => {
   res.status(200).json(res.locals.getUser);
 });
 
 // for testing userCtrl on Postman
-app.post('/login', userCtrl.addUser);
+app.post('/signup', userCtrl.addUser);
 app.put('/update/:score', userCtrl.updateUser);
 app.post('/verify', userCtrl.verifyUser);
 
