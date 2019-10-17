@@ -55,16 +55,23 @@ class gameRoom extends Component {
         "Who? Me? I didn't do anything.",
         "Oh. What's that?",
         "I'm on trial?",
-        "I'm guilty?",
         'Ahh. Help!!',
         'Glugg.',
         'The End,',
       ].reverse(),
-      numGuesses: 7,
+      numGuesses: 6,
+      hangImgSrc: [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Hangman-0.png/60px-Hangman-0.png',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Hangman-1.png/60px-Hangman-1.png',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Hangman-2.png/60px-Hangman-2.png',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Hangman-3.png/60px-Hangman-3.png',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Hangman-4.png/60px-Hangman-4.png',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Hangman-5.png/60px-Hangman-5.png',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Hangman-6.png/60px-Hangman-6.png',
+      ].reverse(),
     };
     this.gameEnded = this.gameEnded.bind(this);
     this.letterClicked = this.letterClicked.bind(this);
-    this.socket = io.connect('http://localhost:3000/');
   }
 
   componentDidMount() {
@@ -126,8 +133,10 @@ class gameRoom extends Component {
         {/* <a href="https://github.com/login/oauth/authorize?client_id=6299af3a88a73b2fd148">
           Login with Github
         </a> */}
-        <h1>Hang♥♥♥♥♥</h1>
+        <h1>Hangman X</h1>
         <h2>Hey handsomeeeeeee ;)</h2>
+        {/* <h3>Stop looking at our screen </h3> */}
+        <img src={this.state.hangImgSrc[this.state.numGuesses]} />
         <Clue clue={this.state.clue} />
         <HangViewer hang={this.state.hang} numGuesses={this.state.numGuesses} />
         <LetterWrapper
@@ -139,6 +148,7 @@ class gameRoom extends Component {
       </div>
     );
   }
+  componentWillUnmount() {}
 }
 
 export default gameRoom;
