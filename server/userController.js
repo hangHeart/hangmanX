@@ -1,50 +1,48 @@
 const client = require('./wordModel.js');
 const userCtrl = {};
 
+userCtrl.getUser = async (req, res, next) => {
+  const { username, password } = req.body;
+  console.log('testing if hit');
+  let queryString = 'SELECT * FROM users WHERE name = ($1)';
 
-userCtrl.getUser= async (req,res,next)=>{
-  const { username, password} = req.body;
-  console.log('testing if hit')
-  let queryString = 'SELECT * FROM users WHERE name = ($1)'
-
-  client.query(queryString,[username], (err,results)=>{
-    if(err){
-      console.log('createUser error',err);
-    }
-    else{
-      console.log('testing results', results)
-      console.log('this is rows: ',results.rows)
+  client.query(queryString, [username], (err, results) => {
+    if (err) {
+      console.log('createUser error', err);
+    } else {
+      console.log('testing results', results);
+      console.log('this is rows: ', results.rows);
       //console.log('check here ==>',results.rows[0].password)
-      console.log('is this 0?: ', results.rows.length)
-      if(results.rows.length !== 0 && (results.rows[0].password === password)){
-        console.log('new test')
+      console.log('is this 0?: ', results.rows.length);
+      if (results.rows.length !== 0 && results.rows[0].password === password) {
+        console.log('new test');
         let responseObj = {
-          username:results.rows[0].name,
-          password:results.rows[0].password
-        }
+          username: results.rows[0].name,
+          password: results.rows[0].password,
+        };
         res.locals.getUser = responseObj;
-        console.log('test 2', res.locals.getUser)
+        console.log('test 2', res.locals.getUser);
       } else {
-        res.locals.getUser = {failure: true}
+        res.locals.getUser = { failure: true };
       }
-      return next()
+      return next();
     }
-    console.log('hit rock bottom')
+    console.log('hit rock bottom');
     // return next();
-  })
-  
-}
+  });
+};
 
 userCtrl.addUser = (request, response, next) => {
   const { name, password } = request.body;
-  const text = 'INSERT INTO users (name, password) VALUES ($1, $2)';
-  client.query(text, [name, password], (err, result) => {
+  console.log('request.body', request.body);
+
+  const text = 'INSERT INTO users (name, password, score) VALUES ($1, $2, $3)';
+  //  WHERE NOT EXISTS (SELECT * FROM users WHERE name=$1 password=$2)
+  client.query(text, [name, password, 0], (err, result) => {
     if (err) console.log('addUser error', err);
     else {
-      console.log('this is a result for the addUser call: ', result);
-      response.locals.madeUser = result;
-      console.log(response.locals.madeUser);
-      next();
+      response.json({ success: true });
+      console.log('user added =>');
     }
   });
 };
@@ -54,7 +52,7 @@ userCtrl.verifyUser = (request, response) => {
   // console.log('request.body', request.body);
 
   const text = 'SELECT COUNT(*) FROM users WHERE (name=$1 AND password=$2)';
-  client.query(text, [name, password], (err, result) => {
+  client.query(text, [name, password, 0], (err, result) => {
     if (err) console.log('addUser error', err);
     else {
       response.status(201).send(`User verified: ${result}`);
@@ -78,19 +76,21 @@ userCtrl.getTopTen = (request, response, next) => {
 };
 
 userCtrl.updateUser = (request, response) => {
-  // need to get the actual score from somewhere
-  const score = parseInt(request.params.score);
+  // const score = parseInt(request.params.score);
   const { name, password } = request.body;
-
+  // SELECT ID, name, password, score+10 AS score from users
+  //'SELECT * FROM users WHERE name = ($1)';
+  //'UPDATE users SET score+10 WHERE name = $1 AND password = $2'
   client.query(
-    'UPDATE users SET score = $3 WHERE name = $1 AND password = $2',
-    [name, password, score],
+    `UPDATE users SET score = score+10 WHERE name = '${name}'`,
+    // [name, password, score],
     (error, results) => {
       if (error) {
         throw error;
+      } else {
+        response.status(200).send(`User Score Updated: ${results}`);
+        console.log('score updated =>');
       }
-      response.status(200).send(`User Score Updated: ${score}`);
-      console.log('score updated:', score);
     }
   );
 };

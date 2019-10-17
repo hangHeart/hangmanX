@@ -20,7 +20,8 @@ const userCtrl = require('./userController');
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.post('/', userCtrl.getUser, (req, res) => {
+//getting user for login
+app.post('/login', userCtrl.getUser, (req, res) => {
   res.status(200).json(res.locals.getUser);
 });
 
@@ -40,9 +41,10 @@ app.post('/signup', userCtrl.addUser, (req,res)=>{
 
 
 // for testing userCtrl on Postman
-app.post('/login', userCtrl.addUser);
-app.put('/update/:score', userCtrl.updateUser);
+app.post('/signup', userCtrl.addUser);
+// app.put('/update/:score', userCtrl.updateUser);
 app.post('/verify', userCtrl.verifyUser);
+// app.put('/score', userCtrl.updateUser);
 
 app.get('/api', (req, res) => {
   console.log('api endpoint');

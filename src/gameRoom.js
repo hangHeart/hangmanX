@@ -7,6 +7,8 @@ import LetterWrapper from './letterWrapper';
 import Clue from './clue';
 import HangViewer from './hangViewer';
 import HighScore from './highScore';
+import swal from 'sweetalert';
+
 // import { isUserWhitespacable } from "@babel/types";
 
 class gameRoom extends Component {
@@ -103,11 +105,36 @@ class gameRoom extends Component {
     // check for failure case
     // console.log('max failed gusses', maxFailedGuesses)
     if (this.state.numGuesses === 0) {
-      alert('game over');
+      // alert('game over');
+      swal({
+        title: 'Haha, you suck!!',
+        text: 'You have used up your last brain cell.',
+        icon: 'error',
+        button: 'Try again!',
+      });
+      document.addEventListener('click', () => {
+        window.location.href = '/game';
+      });
     }
     // check for success case
     if (this.state.disp.join('') == this.state.answer.join('')) {
-      alert('success');
+      // alert('success');
+      // fetch('/score')
+      //   .then(res => res.json())
+      //   .then(data => {
+      //     // const { name, score } = data;
+      //     // console.log('Name is, ', name);
+      //     console.log('Score is, ', data);
+      //   });
+      swal({
+        title: 'Well done!',
+        text: 'You did it!!',
+        icon: 'success',
+        button: 'Rock N Roll!',
+      });
+      document.addEventListener('click', () => {
+        window.location.href = '/game';
+      });
     }
   }
 
@@ -118,10 +145,10 @@ class gameRoom extends Component {
     if (!letters.hasOwnProperty(e)) return;
     letters[e] = true;
     this.setState({ letters });
-    if (this.state.answer.includes(e)) {
+    if (this.state.answer.map(ele => ele.toLocaleLowerCase()).includes(e)) {
       for (let i = 0; i < this.state.answer.length; i++) {
-        if (this.state.answer[i] === e) {
-          disp[i] = e;
+        if (this.state.answer[i].toLocaleLowerCase() === e) {
+          disp[i] = this.state.answer[i];
           this.setState({ disp });
         }
       }
@@ -145,10 +172,13 @@ class gameRoom extends Component {
         {/* <a href="https://github.com/login/oauth/authorize?client_id=6299af3a88a73b2fd148">
           Login with Github
         </a> */}
-        <h1>Hangman X</h1>
+        <h1>Hang♥♥♥♥♥</h1>
         <h2>Hey handsomeeeeeee ;)</h2>
         {/* <h3>Stop looking at our screen </h3> */}
-        <img src={this.state.hangImgSrc[this.state.numGuesses]} />
+        <img
+          className="image"
+          src={this.state.hangImgSrc[this.state.numGuesses]}
+        />
         <Clue clue={this.state.clue} />
         <HangViewer hang={this.state.hang} numGuesses={this.state.numGuesses} />
         <LetterWrapper
