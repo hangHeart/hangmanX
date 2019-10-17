@@ -1,14 +1,19 @@
 .App {
-  margin: 1rem;
+  /* margin: 1rem; */
   font-family: Arial, Helvetica, sans-serif;
   display: grid;
   justify-content: center;
-  background: antiquewhite;
-  height: 400px;
+  background: #faebd7;
+  height: 600px;
 }
 
-button {
-  background-color: lightblue;
+h1 {
+  color: rgb(230, 33, 33);
+}
+
+h2 {
+  text-align: center;
+  color: blue;
 }
 
 .Login {
@@ -22,13 +27,19 @@ button {
   display: flex;
   width: 80%;
 }
+
 .letterButton {
   margin-top: 2%;
-  background-color: blueviolet;
+  font-size: 20px;
   color: white;
   height: auto;
-  width: 5%;
+  width: 10%;
   text-align: center;
+}
+
+button {
+  background-color: darkblue;
+  box-shadow: darkcyan;
 }
 
 .letterButton:disabled {
@@ -43,6 +54,7 @@ button {
 
 #answerViewer {
   text-align: center;
+  font-size: 36px;
 }
 
 body {
@@ -57,15 +69,14 @@ h1 {
   text-align: center;
   background-color: skyblue;
   padding: 15px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-radius: 5px;
 }
 
 .hangviewer {
-  display: table;
   text-align: center;
+  padding: 15px;
+  border-radius: 5px;
   background-color: burlywood;
-  border: 5px solid #dac292;
 }
 
 .letterButtons {
