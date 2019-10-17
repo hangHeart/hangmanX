@@ -87,3 +87,12 @@ h1 {
 .letterButton:hover {
   box-shadow: 2px 2px darkgray;
 }
+
+.RankingButton{
+  margin-top: 2%;
+  font-size: 20px;
+  color: white;
+  height: auto;
+  width: 10%;
+  text-align: center;
+}

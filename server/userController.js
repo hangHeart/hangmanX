@@ -35,17 +35,16 @@ userCtrl.getUser= async (req,res,next)=>{
   
 }
 
-userCtrl.addUser = (request, response) => {
+userCtrl.addUser = (request, response, next) => {
   const { name, password } = request.body;
-  // console.log('request.body', request.body);
-
   const text = 'INSERT INTO users (name, password) VALUES ($1, $2)';
-  //  WHERE NOT EXISTS (SELECT * FROM users WHERE name=$1 password=$2)
   client.query(text, [name, password], (err, result) => {
     if (err) console.log('addUser error', err);
     else {
-      response.status(201).send(`User added: ${result}`);
-      console.log('user added =>');
+      console.log('this is a result for the addUser call: ', result);
+      response.locals.madeUser = result;
+      console.log(response.locals.madeUser);
+      next();
     }
   });
 };
@@ -64,12 +63,16 @@ userCtrl.verifyUser = (request, response) => {
   });
 };
 
-userCtrl.getTopTen = (request, response) => {
-  const text = 'SELECT * FROM users ORDER BY score LIMIT 10';
-  client.query(text, [score], (err, result) => {
+userCtrl.getTopTen = (request, response, next) => {
+  console.log('test1')
+  // const {score} = request.body
+  const text = 'SELECT name, score FROM users ORDER BY score DESC';
+  client.query(text, (err, result) => {
     if (err) console.log('getTopTen error', err);
     else {
-      response.status(200).json(result);
+      // console.log('here are the results,', result.rows)
+      response.locals.getTopTen = result.rows 
+    return next()
     }
   });
 };
