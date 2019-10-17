@@ -6,7 +6,7 @@ class Clue extends Component {
   }
 
   render() {
-    return <div className="clue">{this.props.clue}</div>;
+    return <div className="clue">{`Game clue: ${this.props.clue}`}</div>;
   }
 }
 

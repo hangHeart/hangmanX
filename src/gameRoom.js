@@ -6,7 +6,7 @@ import { Route, Link } from 'react-router-dom';
 import LetterWrapper from './letterWrapper';
 import Clue from './clue';
 import HangViewer from './hangViewer';
-import sweet from 'sweetalert';
+import swal from 'sweetalert';
 
 // import { isUserWhitespacable } from "@babel/types";
 
@@ -103,21 +103,30 @@ class gameRoom extends Component {
     // console.log('max failed gusses', maxFailedGuesses)
     if (this.state.numGuesses === 0) {
       // alert('game over');
-      sweet({
+      swal({
         title: 'You sucks!',
         text: 'Come back and try again!',
         icon: 'error',
         button: 'Try again!',
       });
+      document.addEventListener('click', () => {
+        window.location.href = '/game';
+      });
     }
     // check for success case
     if (this.state.disp.join('') == this.state.answer.join('')) {
       // alert('success');
-      sweet({
+      swal({
         title: 'Well done!',
         text: 'You success!',
         icon: 'success',
         button: 'Aww yiss!',
+      });
+      document.addEventListener('click', () => {
+        // document.getElementById('swal-button swal-button--confirm').innerHTML =
+        //   'Hello World';
+        // <button class="swal-button swal-button--confirm">Aww yiss!</button>
+        window.location.href = '/game';
       });
     }
   }
@@ -129,10 +138,10 @@ class gameRoom extends Component {
     if (!letters.hasOwnProperty(e)) return;
     letters[e] = true;
     this.setState({ letters });
-    if (this.state.answer.includes(e)) {
+    if (this.state.answer.map(ele => ele.toLocaleLowerCase()).includes(e)) {
       for (let i = 0; i < this.state.answer.length; i++) {
-        if (this.state.answer[i] === e) {
-          disp[i] = e;
+        if (this.state.answer[i].toLocaleLowerCase() === e) {
+          disp[i] = this.state.answer[i];
           this.setState({ disp });
         }
       }

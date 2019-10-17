@@ -73,6 +73,8 @@ h1 {
 }
 
 .clue {
+  font-size: 18;
+  font-weight: 800;
   text-align: center;
   background-color: skyblue;
   padding: 15px;
@@ -80,6 +82,8 @@ h1 {
 }
 
 .hangviewer {
+  font-size: 18;
+  font-weight: 500;
   text-align: center;
   padding: 15px;
   border-radius: 5px;
