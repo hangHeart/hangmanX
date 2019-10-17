@@ -28,6 +28,13 @@ h2 {
   width: 80%;
 }
 
+.image {
+  position: relative;
+  /* display: inline-block; */
+  height: 120px;
+  width: 120px;
+}
+
 .letterButton {
   margin-top: 2%;
   font-size: 20px;
