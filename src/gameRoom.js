@@ -123,9 +123,9 @@ class gameRoom extends Component {
   render() {
     return (
       <div className="gameRoom" onKeyPress={e => this.letterClicked(e)}>
-        <a href="https://github.com/login/oauth/authorize?client_id=6299af3a88a73b2fd148">
+        {/* <a href="https://github.com/login/oauth/authorize?client_id=6299af3a88a73b2fd148">
           Login with Github
-        </a>
+        </a> */}
         <h1>Hang♥♥♥♥♥</h1>
         <h2>Hey handsomeeeeeee ;)</h2>
         <Clue clue={this.state.clue} />

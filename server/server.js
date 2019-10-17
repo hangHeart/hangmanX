@@ -18,6 +18,11 @@ const userCtrl = require('./userController');
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+//getting user for login
+app.post('/', userCtrl.getUser, (req, res) => {
+  res.status(200).json(res.locals.getUser);
+});
+
 // for testing userCtrl on Postman
 app.post('/login', userCtrl.addUser);
 app.put('/update/:score', userCtrl.updateUser);
@@ -48,7 +53,23 @@ app.use('/', (req, res, next) => {
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 });
 
+// app.use('/game', (req, res) => {
+//   res.status(200).send();
+// });
+
 app.get('/user/profile', cookieController.getInfofromCookie);
+
+app.use((err, req, res, next) => {
+  const defaultError = {
+    status: 500,
+    message: 'Default Error from the Global Error Handler',
+  };
+  console.log('global error handler triggered');
+  const assignError = { ...defaultError, ...err };
+
+  // send the response
+  res.status(assignError.status).send(assignError.message);
+});
 
 server.listen(PORT, () => {
   console.log('Server listening on ', PORT);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../img_folder/team_Hang.jpg';
 import { Route, Redirect, Link } from 'react-router-dom';
+// import { json } from 'sequelize/types';
 
 class Login extends Component {
   constructor(props) {
@@ -16,11 +17,29 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
+      const data = {username: this.state.username, password: this.state.password};
     console.log('am I here in this universe');
+    fetch('http://localhost:3000/',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(data)
+    }).then(response => response.json())
+    .then(data => {
+        console.log("we are outside the conditional ", data);
+        
+        if(data.username){
+            this.setState({ redirectToGame: true })
+        } else {
+            alert('that was a bad combo')
+        }
 
-    this.setState({ redirectToGame: true });
+    });
+    
     event.preventDefault();
-  }
+}
+  
 
   handleUsernameChange(event) {
     //   let usernameVal = this.state.username
