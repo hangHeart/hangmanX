@@ -26,7 +26,7 @@ class App extends Component{
         //To Do: Game should be one route path = '/' */}
         <Route exact path ='/' component={Login}/>
         <Route path = '/game' component ={gameRoom}/>
-    
+        {/* <Route path = '/failure' component ={Failure}/> */}
       </div>
     );
   }

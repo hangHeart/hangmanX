@@ -115,10 +115,10 @@ class gameRoom extends Component {
     if (!letters.hasOwnProperty(e)) return;
     letters[e] = true;
     this.setState({ letters });
-    if (this.state.answer.includes(e)) {
+    if (this.state.answer.map(ele => ele.toLocaleLowerCase()).includes(e) ) {
       for (let i = 0; i < this.state.answer.length; i++) {
-        if (this.state.answer[i] === e) {
-          disp[i] = e;
+        if (this.state.answer[i].toLocaleLowerCase() === e) {
+          disp[i] = this.state.answer[i];
           this.setState({ disp });
         }
       }
