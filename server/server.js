@@ -25,7 +25,7 @@ app.post('/login', userCtrl.getUser, (req, res) => {
 
 // for testing userCtrl on Postman
 app.post('/signup', userCtrl.addUser);
-app.put('/update/:score', userCtrl.updateUser);
+// app.put('/update/:score', userCtrl.updateUser);
 app.post('/verify', userCtrl.verifyUser);
 // app.put('/score', userCtrl.updateUser);
 

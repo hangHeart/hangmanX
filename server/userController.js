@@ -32,7 +32,7 @@ userCtrl.getUser = async (req, res, next) => {
   });
 };
 
-userCtrl.addUser = (request, response, next) => {
+userCtrl.addUser = (request, response) => {
   const { name, password } = request.body;
   console.log('request.body', request.body);
 
@@ -44,7 +44,6 @@ userCtrl.addUser = (request, response, next) => {
       response.json({ success: true });
       console.log('user added =>');
     }
-    return next();
   });
 };
 

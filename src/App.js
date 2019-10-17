@@ -23,7 +23,7 @@ class App extends Component {
         {/* //this is the route to login page using one component
         //To Do: Game Lobby path = '/gameLobby'
         //To Do: Game should be one route path = '/' */}
-        <Route path="./signup" component={SignUp} />
+        <Route path="/signup" component={SignUp} />
         <Route exact path="/" component={Login} />
         <Route path="/game" component={gameRoom} />
       </div>
